@@ -1,0 +1,42 @@
+<?php
+
+// nama file JSON data Jawa Timur
+$nama_file = "data_jatim.json";
+
+// membaca isi file JSON
+$data_json = file_get_contents($nama_file);
+
+// jika file tidak bisa dibaca
+if($data_json == false){
+    echo "File tidak bisa dibaca\n";
+    exit;
+}
+
+// ubah JSON jadi array PHP
+$data_array = json_decode($data_json, true);
+
+// ambl isi data utama dari key "data"
+$daftar_data = $data_array["data"];
+
+// judul tampilan
+echo "=== DATA DBHCHT JAWA TIMUR 2025 ===\n\n";
+
+// nomor awal
+$nomer = 1;
+
+// looping menampilkan isi data
+foreach($daftar_data as $baris){
+
+    echo $nomer . ". ";
+    echo "Provinsi : " . $baris["nama_provinsi"] . "\n";
+    echo "Kategori : " . $baris["kategori"] . "\n";
+    echo "Jumlah   : " . $baris["jumlah"] . " " . $baris["satuan"] . "\n";
+    echo "Tahun    : " . $baris["tahun"] . "\n\n";
+
+    $nomer++;
+}
+
+// pesan akhir
+echo "Rampung nampilno data Jawa Timur.\n";
+
+?>
